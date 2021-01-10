@@ -40,18 +40,20 @@ class LinearHashTable{
 
 			while(hashArr[curIdx].flag == ISITEM || hashArr[curIdx].flag == AVAILABLE){
 				if(hashArr[curIdx].key == key){
-					cout<<"find "<<key<<"\n";
+               cout<<"True "<<probing<<"\n";
+					//cout<<"find "<<key<<"\n";
 					return;
 				}
 				else if(curIdx == initial_idx && !firstOpr){
-					cout<<"loop\n";
+					//cout<<"loop\n";
 					return;
 				}
 				probing += 1;
 				firstOpr = false;
 				curIdx = (hashfunc(key)+probing - 1)%arrSize;
 			}
-			cout<<"don't find "<<key<<"\n";
+         cout<<"False "<<probing<<"\n";
+			//cout<<"don't find "<<key<<"\n";
 		}
 
 		void put(int key, int value){
@@ -154,18 +156,17 @@ class DoubleHashing{
 
 			while(hashArr[curIdx].flag == ISITEM || hashArr[curIdx].flag == AVAILABLE){
 				if(hashArr[curIdx].key == key){
-					cout<<"find "<<key<<"\n";
+					cout<<"True "<<probing<<"\n";
 					return;
 				}
 				else if(curIdx == initial_idx && !firstOpr){
-					cout<<"loop\n";
 					break;
 				}
 				probing += 1;
 				firstOpr = false;
 				curIdx = (hashfunc(key) + (probing-1)*hashfunc2(key))%arrSize;
 			}
-			cout<<"don't find "<<key<<"\n";
+			cout<<"False "<<probing<<"\n";
 		}
 
 		void put(int key, int value){
@@ -235,7 +236,6 @@ class DoubleHashing{
 			for(int i=0; i<arrSize; i++){
 				cout<<hashArr[i].value<<" ";
 			}
-         cout<<"\n";
 		}
 };
 
@@ -246,14 +246,20 @@ int main(){
 	while(t--){
 		int p;
 		cin >>p;
-		DoubleHashing ht(p);
-		int q;
-		cin >>q;
-		for(int i=0; i<q; i++){
+		LinearHashTable ht(p);
+		int key;
+		cin >>key;
+		for(int i=0; i<key; i++){
+			int q;
+			cin >>q;
+			ht.put(q,q);
+		}
+		int r;
+		cin >>r;
+		for(int i=0; i<r; i++){
 			int num;
 			cin >>num;
-			ht.put(num,num);
+			ht.find(num);
 		}
-		ht.print();
 	}
 }

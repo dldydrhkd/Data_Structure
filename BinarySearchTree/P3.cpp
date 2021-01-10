@@ -161,6 +161,25 @@ class binarySearchTree{
 			preorderPrint(root);
 			cout<<"\n";
 		}
+
+		void inorderPrint(Node* curNode){
+			if(curNode->leftChild != NULL){
+				inorderPrint(curNode->leftChild);
+			}
+			cout<<curNode->data<<" ";
+			if(curNode->rightChild != NULL){
+				inorderPrint(curNode->rightChild);
+			}
+		}
+
+		void inorder(){
+			if(root==NULL){
+				cout<<"Empty\n";
+				return;
+			}
+			inorderPrint(root);
+			cout<<"\n";
+		}
 };
 
 
@@ -177,24 +196,13 @@ int main(){
 			cin >>n;
 			bst.insert(n);
 		}
-		int x;
-		cin >>x;
-
-		Node* temp = bst.find(x);
-		
-		if(temp->leftChild != NULL){
-			Node* min_value = bst.min_findNode(temp->leftChild);
-			cout<<min_value->data<<" ";
+		int q;
+		cin >>q;
+		while(q--){
+			int n;
+			cin >>n;
+			bst.erase(n);
 		}
-		else{
-			cout<<temp->data<<" ";
-		}
-		if(temp->rightChild != NULL){
-			Node* max_value = bst.max_findNode(temp->rightChild);
-			cout<<max_value->data<<"\n";
-		}
-		else{
-			cout<<temp->data<<"\n";
-		}
+		bst.inorder();
 	}
 }
